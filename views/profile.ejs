@@ -1,0 +1,191 @@
+<link rel="stylesheet" href="/css/profile.css" />
+
+<div class="top-left-corner">
+    <form action="/users/signout" method="GET">
+       <p class="user_name">
+            <span class="text-light">
+                WELCOME <%=user.name%>
+            </span>
+       </p> 
+        <button class="btn btn-danger signoutBtn">
+            SIGNOUT
+        </button>
+    </form>
+</div>
+
+<div class="container top_align">
+    <div class="row">
+        <div class="col-md-6 offset-md-1 centered-box">
+
+            <div class="card bg-dark bg-gradient habitCard">
+                <div class="card-body">
+
+                    <div class="text-center p-3">
+                        <h1 class="text-white p-1 text-decoration-underline">
+                            Add Habits</h1>
+                        <button class="bg-danger rounded p-2" id="daily_btn"
+                            onclick="showDailyInfo()">
+                             Daily 
+                        </button>
+                        <button class="bg-warning rounded p-2" id="weekly_btn"
+                            onclick="showWeeklyInfo()">
+                             Weekly
+                         </button>
+                    </div>
+
+                    <form action="/users/habits/addhabit" method="POST">
+                        <div
+                            class="d-flex flex-row align-items-center justify-content-center">
+
+                            <!-- Add Task -->
+                            <div class="p-3">
+                                <input type="text"
+                                    name="habit_name"
+                                    class="habit_details p-2 rounded outline-0 form-control"
+                                    placeholder="Enter your Habit"
+                                    required>
+                            </div>
+                            <div>
+                                <button
+                                    class="btn btn-success"
+                                    type="submit">
+                                    <i class="fa-solid fa-circle-plus"
+                                        style="color: #33d764;">
+                                    </i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div
+                        class="d-flex flex-row align-items-center justify-content-sm-evenly p-2">
+
+                        <div>
+                            <i class="fa-sharp fa-solid fa-circle-check"
+                                style="color: #2cdd59;"></i>
+                            <span class="text-white">Done</span>
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-circle-xmark"
+                                style="color: #e61e1e;"></i>
+                            <span class="text-white">Not Done</span>
+                        </div>
+                        <div>
+                            <i class="fa-sharp fa-solid fa-circle-minus"
+                                style="color: #d1f41f;"></i>
+                            <span class="text-white">Not-Complete</span>
+                        </div>
+                    </div>
+
+
+                    <div class="habbit-display__width">
+                        <ul class="habit-list">
+                            <li class="with-weekly">
+                                <% for(let details of habits) {%>
+                                <div class="habit_list_item">
+
+                                    <%let currentDate = new Date();
+                                    let dd = currentDate.getDate();
+                                    let mm = currentDate.getMonth() + 1;
+                                    const yyyy = currentDate.getFullYear();
+                                    if (dd < 10) dd = '0' + dd;
+                                    if (mm < 10) mm = '0' + mm;
+                                    let today = dd + '/' + mm + '/' + yyyy;
+                                    let found;
+                                    let status;
+                                    details.habitDates.find((item) => {
+                                        if(item.date === today)
+                                        {
+                                            found = true;
+                                            status = item.complete;
+                                        }
+                                    });
+                                    %>
+
+      <div class="d-flex flex-row align-items-center justify-content-sm-evenly m-5">
+
+        <div>
+            <a href="/users/habits/status-update/?id=<%= details._id %>&date=<%= today %>">
+
+                    <% if(found && status==='yes'){ %>
+                        <i class="fas fa-check-circle"></i>
+                    <% } else if(found && status==='no'){ %>
+                        <i class="fas fa-times-circle"></i>
+                    <% } else { %>
+                        <i class="fas fa-minus-circle"></i>
+                    <% } %>
+         </a>
+        </div>
+
+        
+         <div class="habit-list-item-name m-2 ">
+            <%= details.habitName %>
+        </div>
+                            
+                         
+        <div class="d-flex">
+
+            
+            <a href="/users/habits/favorite-habit/?id=<%= details._id %>" class="favorite">
+                    <% if(details.favouriteHabit) { %>
+                                <i class="fa-solid fa-star"></i>
+                    <% } else { %>
+                                <i class="fa-regular fa-star"></i>
+                    <% } %>
+            </a>
+            
+            
+            <a href="/users/habits/remove/?id=<%= details._id %>" class="remove">
+                    <i class="fa-solid fa-trash"></i>
+            </a>
+    
+
+        </div>
+
+            </div>
+                        <div class="weekly__container">
+                                <%for(let d of weeklyDate){%>
+                                <div class="weekly__date">
+                                    <p><%= d %></p>
+                                    <% 
+                                    let find;
+                                    let stat;
+                                    details.habitDates.find((item) => {
+                                        if(item.date === d)
+                                        {
+                                            find = true;
+                                            stat = item.complete;
+                                        }
+                                    });
+                                    %>
+                                    <a href="/users/habits/status-update/?id=<%= details._id %>&date=<%= d %>" class="status">
+                                        <% if(find && stat==='yes'){ %>
+                                            <i class="fas fa-check-circle"></i>
+                                        <% } else if(find && stat==='no'){ %>
+                                            <i class="fas fa-times-circle"></i>
+                                        <% } else { %>
+                                            <i class="fas fa-minus-circle"></i>
+                                        <% } %>
+                                    </a>
+                                </div>
+                            <%}%>     
+                            </div>
+                        <%}%>
+
+
+                            </li>
+                        </ul>
+                    </div> 
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/profile.js"></script>

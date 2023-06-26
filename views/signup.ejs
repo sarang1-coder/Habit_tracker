@@ -1,0 +1,74 @@
+
+
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body ">
+            <h3
+                class="text-center text-center text-decoration-underline text-uppercase">
+                <i class="fa-solid fa-user-plus"></i>
+                Signup Page
+            </h3>
+
+            <form action="/users/create" method="POST">
+
+                <div class="form-group p-2">
+                    <label for="name">Name</label>
+                    <input type="text"
+                        class="form-control"
+                        id="name"
+                        name="name"
+                        value="<%= typeof text !='undefined' ? 'name' : '' %>"
+                        placeholder="Enter Name" required />
+                </div>
+
+                <div class="form-group p-2">
+                    <label for="email">Email address</label>
+                    <input type="email"
+                        class="form-control"
+                        id="email"
+                        name="email"
+                        aria-describedby="emailHelp"
+                        value="<%= typeof email !='undefined' ? 'email' : '' %>"
+                        placeholder="Enter email" required />
+                </div>
+
+                <div class="form-group p-2">
+                    <label for="password">Password</label>
+                    <input type="password"
+                        class="form-control"
+                        id="password"
+                        name="password"
+                        value="password" required />
+                </div>
+
+                <div class="form-group p-2">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password"
+                        class="form-control"
+                        id="confirm_password"
+                        name="confirm_password"
+                        value="password" required />
+                </div>
+
+                <div class="p-2">
+                    <button type="submit"
+                        class="btn btn-primary">
+                        SIGNUP
+                    </button>
+                </div>
+
+                <div class="p-2">
+                    <span>Already have an Account?</span>
+                    <button type="submit"
+                        class="btn btn-primary">
+                        <a href="/users/signin"
+                            class="text-white text-decoration-none">
+                            SIGNIN
+                        </a>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
