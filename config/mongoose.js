@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb://localhost/Habit_tracker_app');
+mongoose.connect('mongodb+srv://sarang15mar:Sarang123@cluster0.wrmoc7c.mongodb.net/abcd');
 
 const db=mongoose.connection;
 
