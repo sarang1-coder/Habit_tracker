@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-mongoose.connect('mongodb+srv://sarang15mar:Sarang1234@cluster0.wrmoc7c.mongodb.net/abcd');
+mongoose.connect('mongodb+srv://sarang15mar:Sarang123@cluster0.wrmoc7c.mongodb.net/abcd');
 
 const db=mongoose.connection;
 
