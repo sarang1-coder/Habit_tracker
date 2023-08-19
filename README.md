@@ -5,6 +5,8 @@ Progress and also add habits in your favourite lists.
 
 Tech Stacks-Node.js,Express.js,MongoDB,Noty Messages,Passport-google-oauth
 
+![Folder Structure](habit_tracker.png.jpg)
+
 
 
 
